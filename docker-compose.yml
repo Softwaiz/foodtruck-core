@@ -1,0 +1,23 @@
+volumes:
+  db:
+    external: true
+    name: foodtruck-local
+
+networks:
+  backend: {}
+  
+services:
+  database:
+    image: postgres
+    hostname: database
+    networks:
+      - backend
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: EeT5ievohp3l
+      POSTGRES_PASSWORD: Thiegho2eigai1ey3w
+      POSTGRES_DB: foodtruck
+    ports:
+      - 6996:5432
+    restart: always

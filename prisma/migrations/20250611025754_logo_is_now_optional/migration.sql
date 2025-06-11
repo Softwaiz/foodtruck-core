@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Truck" ALTER COLUMN "logo" DROP NOT NULL;
