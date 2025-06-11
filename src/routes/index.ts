@@ -5,6 +5,7 @@ import { TruckController } from "./trucks/trucks.controller";
 import { Controller } from "../core";
 import { TruckLocationController } from "./locations/location.controller";
 import { UserController } from "./users/user.controller";
+import { SearchController } from "./search/search.controller";
 
 export function setupRoutes(app: Application) {
     const controllers: [first: string, last: Controller][] = [
@@ -12,8 +13,10 @@ export function setupRoutes(app: Application) {
         ["/auth/signup", new SignupController()],
         ["/users", new UserController()],
         ["/trucks", new TruckController()],
+        ["/search", new SearchController()],
         ["/trucks/:truckId/locations", new TruckLocationController()]
     ];
+    
     controllers.forEach(([path, controller]) => {
         let router = Router();
         controller.mount(router);

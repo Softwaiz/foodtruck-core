@@ -1,8 +1,8 @@
 const EARTH_KM_IN_DEGREES = 111.2;
 
-interface EarthPoint {
+export interface EarthPoint {
     lat: number;
-    lon: number;
+    lng: number;
 }
 
 export class TruckProximityService {
@@ -19,11 +19,10 @@ export class TruckProximityService {
                 max: center.lat + latDelta,
             },
             lon: {
-                min: center.lon - lonDelta,
-                max: center.lon + lonDelta
+                min: center.lng - lonDelta,
+                max: center.lng + lonDelta
             }
         }
     }
-
 
 }
