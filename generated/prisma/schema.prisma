@@ -21,7 +21,7 @@ model User {
 }
 
 model Truck {
-  id          String    @unique @default(uuid())
+  id          String          @unique @default(uuid())
   logo        Json?
   name        String
   description String
@@ -29,15 +29,17 @@ model Truck {
   phoneNumber String
   website     String
   ownerId     String
-  owner       User      @relation(fields: [ownerId], references: [id])
-  createdAt   DateTime  @default(now())
+  owner       User            @relation(fields: [ownerId], references: [id])
+  createdAt   DateTime        @default(now())
   updatedAt   DateTime?
+  locations   TruckLocation[]
 }
 
 model TruckLocation {
-  id        String    @unique @default(uuid())
+  id        String   @unique @default(uuid())
   latitude  Decimal
   longitude Decimal
-  createdAt DateTime  @default(now())
-  updatedAt DateTime?
+  truckId   String
+  truck     Truck    @relation(fields: [truckId], references: [id])
+  timestamp DateTime @default(now())
 }

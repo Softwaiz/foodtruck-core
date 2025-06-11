@@ -1,6 +1,6 @@
 import express, { Application } from "express";
 import { config } from "dotenv";
-import { mountControllers } from "./controllers";
+import { setupRoutes } from "./routes";
 import { AuthMiddleware } from "./middlewares/auth.middleware";
 import { DefaultErrorHandler } from "./errors/handler";
 
@@ -9,7 +9,7 @@ config();
 let app: Application = express();
 app.use(new AuthMiddleware().use);
 
-app = mountControllers(app)
+app = setupRoutes(app)
 .use(new DefaultErrorHandler().use);
 
 

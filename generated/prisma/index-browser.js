@@ -147,8 +147,8 @@ exports.Prisma.TruckLocationScalarFieldEnum = {
   id: 'id',
   latitude: 'latitude',
   longitude: 'longitude',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  truckId: 'truckId',
+  timestamp: 'timestamp'
 };
 
 exports.Prisma.SortOrder = {

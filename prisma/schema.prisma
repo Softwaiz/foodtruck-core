@@ -32,12 +32,14 @@ model Truck {
     owner User @relation(fields: [ownerId], references: [id])
     createdAt DateTime @default(now())
     updatedAt DateTime?
+    locations TruckLocation[]
 }
 
 model TruckLocation {
     id String @unique @default(uuid())
     latitude Decimal 
     longitude Decimal
-    createdAt DateTime @default(now())
-    updatedAt DateTime?
+    truckId String
+    truck Truck @relation(fields: [truckId], references: [id])
+    timestamp DateTime @default(now())
 }

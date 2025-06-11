@@ -1,11 +1,11 @@
 import { Request, Response, Router } from "express";
-import { Controller } from "../core";
-import { SigninSchema } from "../schemas/signin";
-import { ValidationError } from "../errors/validation.error";
+import { Controller } from "../../core";
+import { SigninSchema } from "../../schemas/signin";
+import { ValidationError } from "../../errors/validation.error";
 import { SigninService } from "./signin.service";
-import { NotFoundError } from "../errors/not-found.error";
-import { PasswordService } from "../password/password.service";
-import { IdentityService } from "../identity/identity.service";
+import { NotFoundError } from "../../errors/not-found.error";
+import { PasswordService } from "../../password/password.service";
+import { IdentityService } from "../../identity/identity.service";
 
 export class SigninController implements Controller {
 
