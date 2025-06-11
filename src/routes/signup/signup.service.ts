@@ -1,7 +1,7 @@
-import { PrismaClient } from "../../generated/prisma";
-import { PasswordService } from "../password/password.service";
-import { SignupInput } from "../schemas/signup";
-import { CreateTruckInput } from "../schemas/truck";
+import { PrismaClient } from "../../../generated/prisma";
+import { PasswordService } from "../../password/password.service";
+import { SignupInput } from "../../schemas/signup";
+import { CreateTruckInput } from "../../schemas/truck";
 
 export class SignupService {
 

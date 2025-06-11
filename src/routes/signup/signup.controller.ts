@@ -1,10 +1,10 @@
 import { Request, Response, Router } from "express";
-import { Controller } from "../core";
-import { SignupSchema } from "../schemas/signup";
-import { ValidationError } from "../errors/validation.error";
+import { Controller } from "../../core";
+import { SignupSchema } from "../../schemas/signup";
+import { ValidationError } from "../../errors/validation.error";
 import { SignupService } from "./signup.service";
-import { DuplicationError } from "../errors/duplication.error";
-import { CreateTruckSchema } from "../schemas/truck";
+import { DuplicationError } from "../../errors/duplication.error";
+import { CreateTruckSchema } from "../../schemas/truck";
 
 export class SignupController implements Controller {
 

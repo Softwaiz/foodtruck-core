@@ -1078,6 +1078,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type TruckCountOutputType
+   */
+
+  export type TruckCountOutputType = {
+    locations: number
+  }
+
+  export type TruckCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    locations?: boolean | TruckCountOutputTypeCountLocationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TruckCountOutputType without action
+   */
+  export type TruckCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TruckCountOutputType
+     */
+    select?: TruckCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TruckCountOutputType without action
+   */
+  export type TruckCountOutputTypeCountLocationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TruckLocationWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -2378,6 +2409,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
+    locations?: boolean | Truck$locationsArgs<ExtArgs>
+    _count?: boolean | TruckCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["truck"]>
 
   export type TruckSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2424,6 +2457,8 @@ export namespace Prisma {
   export type TruckOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "logo" | "name" | "description" | "cuisineType" | "phoneNumber" | "website" | "ownerId" | "createdAt" | "updatedAt", ExtArgs["result"]["truck"]>
   export type TruckInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     owner?: boolean | UserDefaultArgs<ExtArgs>
+    locations?: boolean | Truck$locationsArgs<ExtArgs>
+    _count?: boolean | TruckCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TruckIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     owner?: boolean | UserDefaultArgs<ExtArgs>
@@ -2436,6 +2471,7 @@ export namespace Prisma {
     name: "Truck"
     objects: {
       owner: Prisma.$UserPayload<ExtArgs>
+      locations: Prisma.$TruckLocationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2843,6 +2879,7 @@ export namespace Prisma {
   export interface Prisma__TruckClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     owner<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    locations<T extends Truck$locationsArgs<ExtArgs> = {}>(args?: Subset<T, Truck$locationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TruckLocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3278,6 +3315,30 @@ export namespace Prisma {
   }
 
   /**
+   * Truck.locations
+   */
+  export type Truck$locationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TruckLocation
+     */
+    select?: TruckLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TruckLocation
+     */
+    omit?: TruckLocationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TruckLocationInclude<ExtArgs> | null
+    where?: TruckLocationWhereInput
+    orderBy?: TruckLocationOrderByWithRelationInput | TruckLocationOrderByWithRelationInput[]
+    cursor?: TruckLocationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TruckLocationScalarFieldEnum | TruckLocationScalarFieldEnum[]
+  }
+
+  /**
    * Truck without action
    */
   export type TruckDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3322,24 +3383,24 @@ export namespace Prisma {
     id: string | null
     latitude: Decimal | null
     longitude: Decimal | null
-    createdAt: Date | null
-    updatedAt: Date | null
+    truckId: string | null
+    timestamp: Date | null
   }
 
   export type TruckLocationMaxAggregateOutputType = {
     id: string | null
     latitude: Decimal | null
     longitude: Decimal | null
-    createdAt: Date | null
-    updatedAt: Date | null
+    truckId: string | null
+    timestamp: Date | null
   }
 
   export type TruckLocationCountAggregateOutputType = {
     id: number
     latitude: number
     longitude: number
-    createdAt: number
-    updatedAt: number
+    truckId: number
+    timestamp: number
     _all: number
   }
 
@@ -3358,24 +3419,24 @@ export namespace Prisma {
     id?: true
     latitude?: true
     longitude?: true
-    createdAt?: true
-    updatedAt?: true
+    truckId?: true
+    timestamp?: true
   }
 
   export type TruckLocationMaxAggregateInputType = {
     id?: true
     latitude?: true
     longitude?: true
-    createdAt?: true
-    updatedAt?: true
+    truckId?: true
+    timestamp?: true
   }
 
   export type TruckLocationCountAggregateInputType = {
     id?: true
     latitude?: true
     longitude?: true
-    createdAt?: true
-    updatedAt?: true
+    truckId?: true
+    timestamp?: true
     _all?: true
   }
 
@@ -3469,8 +3530,8 @@ export namespace Prisma {
     id: string
     latitude: Decimal
     longitude: Decimal
-    createdAt: Date
-    updatedAt: Date | null
+    truckId: string
+    timestamp: Date
     _count: TruckLocationCountAggregateOutputType | null
     _avg: TruckLocationAvgAggregateOutputType | null
     _sum: TruckLocationSumAggregateOutputType | null
@@ -3496,45 +3557,59 @@ export namespace Prisma {
     id?: boolean
     latitude?: boolean
     longitude?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
+    truckId?: boolean
+    timestamp?: boolean
+    truck?: boolean | TruckDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["truckLocation"]>
 
   export type TruckLocationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     latitude?: boolean
     longitude?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
+    truckId?: boolean
+    timestamp?: boolean
+    truck?: boolean | TruckDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["truckLocation"]>
 
   export type TruckLocationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     latitude?: boolean
     longitude?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
+    truckId?: boolean
+    timestamp?: boolean
+    truck?: boolean | TruckDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["truckLocation"]>
 
   export type TruckLocationSelectScalar = {
     id?: boolean
     latitude?: boolean
     longitude?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
+    truckId?: boolean
+    timestamp?: boolean
   }
 
-  export type TruckLocationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "latitude" | "longitude" | "createdAt" | "updatedAt", ExtArgs["result"]["truckLocation"]>
+  export type TruckLocationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "latitude" | "longitude" | "truckId" | "timestamp", ExtArgs["result"]["truckLocation"]>
+  export type TruckLocationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    truck?: boolean | TruckDefaultArgs<ExtArgs>
+  }
+  export type TruckLocationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    truck?: boolean | TruckDefaultArgs<ExtArgs>
+  }
+  export type TruckLocationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    truck?: boolean | TruckDefaultArgs<ExtArgs>
+  }
 
   export type $TruckLocationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "TruckLocation"
-    objects: {}
+    objects: {
+      truck: Prisma.$TruckPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       latitude: Prisma.Decimal
       longitude: Prisma.Decimal
-      createdAt: Date
-      updatedAt: Date | null
+      truckId: string
+      timestamp: Date
     }, ExtArgs["result"]["truckLocation"]>
     composites: {}
   }
@@ -3929,6 +4004,7 @@ export namespace Prisma {
    */
   export interface Prisma__TruckLocationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    truck<T extends TruckDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TruckDefaultArgs<ExtArgs>>): Prisma__TruckClient<$Result.GetResult<Prisma.$TruckPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3961,8 +4037,8 @@ export namespace Prisma {
     readonly id: FieldRef<"TruckLocation", 'String'>
     readonly latitude: FieldRef<"TruckLocation", 'Decimal'>
     readonly longitude: FieldRef<"TruckLocation", 'Decimal'>
-    readonly createdAt: FieldRef<"TruckLocation", 'DateTime'>
-    readonly updatedAt: FieldRef<"TruckLocation", 'DateTime'>
+    readonly truckId: FieldRef<"TruckLocation", 'String'>
+    readonly timestamp: FieldRef<"TruckLocation", 'DateTime'>
   }
     
 
@@ -3979,6 +4055,10 @@ export namespace Prisma {
      * Omit specific fields from the TruckLocation
      */
     omit?: TruckLocationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TruckLocationInclude<ExtArgs> | null
     /**
      * Filter, which TruckLocation to fetch.
      */
@@ -3998,6 +4078,10 @@ export namespace Prisma {
      */
     omit?: TruckLocationOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TruckLocationInclude<ExtArgs> | null
+    /**
      * Filter, which TruckLocation to fetch.
      */
     where: TruckLocationWhereUniqueInput
@@ -4015,6 +4099,10 @@ export namespace Prisma {
      * Omit specific fields from the TruckLocation
      */
     omit?: TruckLocationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TruckLocationInclude<ExtArgs> | null
     /**
      * Filter, which TruckLocation to fetch.
      */
@@ -4064,6 +4152,10 @@ export namespace Prisma {
      */
     omit?: TruckLocationOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TruckLocationInclude<ExtArgs> | null
+    /**
      * Filter, which TruckLocation to fetch.
      */
     where?: TruckLocationWhereInput
@@ -4112,6 +4204,10 @@ export namespace Prisma {
      */
     omit?: TruckLocationOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TruckLocationInclude<ExtArgs> | null
+    /**
      * Filter, which TruckLocations to fetch.
      */
     where?: TruckLocationWhereInput
@@ -4155,6 +4251,10 @@ export namespace Prisma {
      */
     omit?: TruckLocationOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TruckLocationInclude<ExtArgs> | null
+    /**
      * The data needed to create a TruckLocation.
      */
     data: XOR<TruckLocationCreateInput, TruckLocationUncheckedCreateInput>
@@ -4188,6 +4288,10 @@ export namespace Prisma {
      */
     data: TruckLocationCreateManyInput | TruckLocationCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TruckLocationIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4202,6 +4306,10 @@ export namespace Prisma {
      * Omit specific fields from the TruckLocation
      */
     omit?: TruckLocationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TruckLocationInclude<ExtArgs> | null
     /**
      * The data needed to update a TruckLocation.
      */
@@ -4254,6 +4362,10 @@ export namespace Prisma {
      * Limit how many TruckLocations to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TruckLocationIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4268,6 +4380,10 @@ export namespace Prisma {
      * Omit specific fields from the TruckLocation
      */
     omit?: TruckLocationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TruckLocationInclude<ExtArgs> | null
     /**
      * The filter to search for the TruckLocation to update in case it exists.
      */
@@ -4294,6 +4410,10 @@ export namespace Prisma {
      * Omit specific fields from the TruckLocation
      */
     omit?: TruckLocationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TruckLocationInclude<ExtArgs> | null
     /**
      * Filter which TruckLocation to delete.
      */
@@ -4326,6 +4446,10 @@ export namespace Prisma {
      * Omit specific fields from the TruckLocation
      */
     omit?: TruckLocationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TruckLocationInclude<ExtArgs> | null
   }
 
 
@@ -4376,8 +4500,8 @@ export namespace Prisma {
     id: 'id',
     latitude: 'latitude',
     longitude: 'longitude',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    truckId: 'truckId',
+    timestamp: 'timestamp'
   };
 
   export type TruckLocationScalarFieldEnum = (typeof TruckLocationScalarFieldEnum)[keyof typeof TruckLocationScalarFieldEnum]
@@ -4582,6 +4706,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Truck"> | Date | string
     updatedAt?: DateTimeNullableFilter<"Truck"> | Date | string | null
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
+    locations?: TruckLocationListRelationFilter
   }
 
   export type TruckOrderByWithRelationInput = {
@@ -4596,6 +4721,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrderInput | SortOrder
     owner?: UserOrderByWithRelationInput
+    locations?: TruckLocationOrderByRelationAggregateInput
   }
 
   export type TruckWhereUniqueInput = Prisma.AtLeast<{
@@ -4613,6 +4739,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Truck"> | Date | string
     updatedAt?: DateTimeNullableFilter<"Truck"> | Date | string | null
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
+    locations?: TruckLocationListRelationFilter
   }, "id">
 
   export type TruckOrderByWithAggregationInput = {
@@ -4654,16 +4781,18 @@ export namespace Prisma {
     id?: StringFilter<"TruckLocation"> | string
     latitude?: DecimalFilter<"TruckLocation"> | Decimal | DecimalJsLike | number | string
     longitude?: DecimalFilter<"TruckLocation"> | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFilter<"TruckLocation"> | Date | string
-    updatedAt?: DateTimeNullableFilter<"TruckLocation"> | Date | string | null
+    truckId?: StringFilter<"TruckLocation"> | string
+    timestamp?: DateTimeFilter<"TruckLocation"> | Date | string
+    truck?: XOR<TruckScalarRelationFilter, TruckWhereInput>
   }
 
   export type TruckLocationOrderByWithRelationInput = {
     id?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrderInput | SortOrder
+    truckId?: SortOrder
+    timestamp?: SortOrder
+    truck?: TruckOrderByWithRelationInput
   }
 
   export type TruckLocationWhereUniqueInput = Prisma.AtLeast<{
@@ -4673,16 +4802,17 @@ export namespace Prisma {
     NOT?: TruckLocationWhereInput | TruckLocationWhereInput[]
     latitude?: DecimalFilter<"TruckLocation"> | Decimal | DecimalJsLike | number | string
     longitude?: DecimalFilter<"TruckLocation"> | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFilter<"TruckLocation"> | Date | string
-    updatedAt?: DateTimeNullableFilter<"TruckLocation"> | Date | string | null
+    truckId?: StringFilter<"TruckLocation"> | string
+    timestamp?: DateTimeFilter<"TruckLocation"> | Date | string
+    truck?: XOR<TruckScalarRelationFilter, TruckWhereInput>
   }, "id">
 
   export type TruckLocationOrderByWithAggregationInput = {
     id?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrderInput | SortOrder
+    truckId?: SortOrder
+    timestamp?: SortOrder
     _count?: TruckLocationCountOrderByAggregateInput
     _avg?: TruckLocationAvgOrderByAggregateInput
     _max?: TruckLocationMaxOrderByAggregateInput
@@ -4697,8 +4827,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"TruckLocation"> | string
     latitude?: DecimalWithAggregatesFilter<"TruckLocation"> | Decimal | DecimalJsLike | number | string
     longitude?: DecimalWithAggregatesFilter<"TruckLocation"> | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeWithAggregatesFilter<"TruckLocation"> | Date | string
-    updatedAt?: DateTimeNullableWithAggregatesFilter<"TruckLocation"> | Date | string | null
+    truckId?: StringWithAggregatesFilter<"TruckLocation"> | string
+    timestamp?: DateTimeWithAggregatesFilter<"TruckLocation"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -4786,6 +4916,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string | null
     owner: UserCreateNestedOneWithoutTrucksInput
+    locations?: TruckLocationCreateNestedManyWithoutTruckInput
   }
 
   export type TruckUncheckedCreateInput = {
@@ -4799,6 +4930,7 @@ export namespace Prisma {
     ownerId: string
     createdAt?: Date | string
     updatedAt?: Date | string | null
+    locations?: TruckLocationUncheckedCreateNestedManyWithoutTruckInput
   }
 
   export type TruckUpdateInput = {
@@ -4812,6 +4944,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     owner?: UserUpdateOneRequiredWithoutTrucksNestedInput
+    locations?: TruckLocationUpdateManyWithoutTruckNestedInput
   }
 
   export type TruckUncheckedUpdateInput = {
@@ -4825,6 +4958,7 @@ export namespace Prisma {
     ownerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    locations?: TruckLocationUncheckedUpdateManyWithoutTruckNestedInput
   }
 
   export type TruckCreateManyInput = {
@@ -4869,56 +5003,55 @@ export namespace Prisma {
     id?: string
     latitude: Decimal | DecimalJsLike | number | string
     longitude: Decimal | DecimalJsLike | number | string
-    createdAt?: Date | string
-    updatedAt?: Date | string | null
+    timestamp?: Date | string
+    truck: TruckCreateNestedOneWithoutLocationsInput
   }
 
   export type TruckLocationUncheckedCreateInput = {
     id?: string
     latitude: Decimal | DecimalJsLike | number | string
     longitude: Decimal | DecimalJsLike | number | string
-    createdAt?: Date | string
-    updatedAt?: Date | string | null
+    truckId: string
+    timestamp?: Date | string
   }
 
   export type TruckLocationUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    truck?: TruckUpdateOneRequiredWithoutLocationsNestedInput
   }
 
   export type TruckLocationUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    truckId?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TruckLocationCreateManyInput = {
     id?: string
     latitude: Decimal | DecimalJsLike | number | string
     longitude: Decimal | DecimalJsLike | number | string
-    createdAt?: Date | string
-    updatedAt?: Date | string | null
+    truckId: string
+    timestamp?: Date | string
   }
 
   export type TruckLocationUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TruckLocationUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    truckId?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -5077,6 +5210,16 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
+  export type TruckLocationListRelationFilter = {
+    every?: TruckLocationWhereInput
+    some?: TruckLocationWhereInput
+    none?: TruckLocationWhereInput
+  }
+
+  export type TruckLocationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type TruckCountOrderByAggregateInput = {
     id?: SortOrder
     logo?: SortOrder
@@ -5151,12 +5294,17 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
+  export type TruckScalarRelationFilter = {
+    is?: TruckWhereInput
+    isNot?: TruckWhereInput
+  }
+
   export type TruckLocationCountOrderByAggregateInput = {
     id?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    truckId?: SortOrder
+    timestamp?: SortOrder
   }
 
   export type TruckLocationAvgOrderByAggregateInput = {
@@ -5168,16 +5316,16 @@ export namespace Prisma {
     id?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    truckId?: SortOrder
+    timestamp?: SortOrder
   }
 
   export type TruckLocationMinOrderByAggregateInput = {
     id?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    truckId?: SortOrder
+    timestamp?: SortOrder
   }
 
   export type TruckLocationSumOrderByAggregateInput = {
@@ -5261,6 +5409,20 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type TruckLocationCreateNestedManyWithoutTruckInput = {
+    create?: XOR<TruckLocationCreateWithoutTruckInput, TruckLocationUncheckedCreateWithoutTruckInput> | TruckLocationCreateWithoutTruckInput[] | TruckLocationUncheckedCreateWithoutTruckInput[]
+    connectOrCreate?: TruckLocationCreateOrConnectWithoutTruckInput | TruckLocationCreateOrConnectWithoutTruckInput[]
+    createMany?: TruckLocationCreateManyTruckInputEnvelope
+    connect?: TruckLocationWhereUniqueInput | TruckLocationWhereUniqueInput[]
+  }
+
+  export type TruckLocationUncheckedCreateNestedManyWithoutTruckInput = {
+    create?: XOR<TruckLocationCreateWithoutTruckInput, TruckLocationUncheckedCreateWithoutTruckInput> | TruckLocationCreateWithoutTruckInput[] | TruckLocationUncheckedCreateWithoutTruckInput[]
+    connectOrCreate?: TruckLocationCreateOrConnectWithoutTruckInput | TruckLocationCreateOrConnectWithoutTruckInput[]
+    createMany?: TruckLocationCreateManyTruckInputEnvelope
+    connect?: TruckLocationWhereUniqueInput | TruckLocationWhereUniqueInput[]
+  }
+
   export type UserUpdateOneRequiredWithoutTrucksNestedInput = {
     create?: XOR<UserCreateWithoutTrucksInput, UserUncheckedCreateWithoutTrucksInput>
     connectOrCreate?: UserCreateOrConnectWithoutTrucksInput
@@ -5269,12 +5431,54 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTrucksInput, UserUpdateWithoutTrucksInput>, UserUncheckedUpdateWithoutTrucksInput>
   }
 
+  export type TruckLocationUpdateManyWithoutTruckNestedInput = {
+    create?: XOR<TruckLocationCreateWithoutTruckInput, TruckLocationUncheckedCreateWithoutTruckInput> | TruckLocationCreateWithoutTruckInput[] | TruckLocationUncheckedCreateWithoutTruckInput[]
+    connectOrCreate?: TruckLocationCreateOrConnectWithoutTruckInput | TruckLocationCreateOrConnectWithoutTruckInput[]
+    upsert?: TruckLocationUpsertWithWhereUniqueWithoutTruckInput | TruckLocationUpsertWithWhereUniqueWithoutTruckInput[]
+    createMany?: TruckLocationCreateManyTruckInputEnvelope
+    set?: TruckLocationWhereUniqueInput | TruckLocationWhereUniqueInput[]
+    disconnect?: TruckLocationWhereUniqueInput | TruckLocationWhereUniqueInput[]
+    delete?: TruckLocationWhereUniqueInput | TruckLocationWhereUniqueInput[]
+    connect?: TruckLocationWhereUniqueInput | TruckLocationWhereUniqueInput[]
+    update?: TruckLocationUpdateWithWhereUniqueWithoutTruckInput | TruckLocationUpdateWithWhereUniqueWithoutTruckInput[]
+    updateMany?: TruckLocationUpdateManyWithWhereWithoutTruckInput | TruckLocationUpdateManyWithWhereWithoutTruckInput[]
+    deleteMany?: TruckLocationScalarWhereInput | TruckLocationScalarWhereInput[]
+  }
+
+  export type TruckLocationUncheckedUpdateManyWithoutTruckNestedInput = {
+    create?: XOR<TruckLocationCreateWithoutTruckInput, TruckLocationUncheckedCreateWithoutTruckInput> | TruckLocationCreateWithoutTruckInput[] | TruckLocationUncheckedCreateWithoutTruckInput[]
+    connectOrCreate?: TruckLocationCreateOrConnectWithoutTruckInput | TruckLocationCreateOrConnectWithoutTruckInput[]
+    upsert?: TruckLocationUpsertWithWhereUniqueWithoutTruckInput | TruckLocationUpsertWithWhereUniqueWithoutTruckInput[]
+    createMany?: TruckLocationCreateManyTruckInputEnvelope
+    set?: TruckLocationWhereUniqueInput | TruckLocationWhereUniqueInput[]
+    disconnect?: TruckLocationWhereUniqueInput | TruckLocationWhereUniqueInput[]
+    delete?: TruckLocationWhereUniqueInput | TruckLocationWhereUniqueInput[]
+    connect?: TruckLocationWhereUniqueInput | TruckLocationWhereUniqueInput[]
+    update?: TruckLocationUpdateWithWhereUniqueWithoutTruckInput | TruckLocationUpdateWithWhereUniqueWithoutTruckInput[]
+    updateMany?: TruckLocationUpdateManyWithWhereWithoutTruckInput | TruckLocationUpdateManyWithWhereWithoutTruckInput[]
+    deleteMany?: TruckLocationScalarWhereInput | TruckLocationScalarWhereInput[]
+  }
+
+  export type TruckCreateNestedOneWithoutLocationsInput = {
+    create?: XOR<TruckCreateWithoutLocationsInput, TruckUncheckedCreateWithoutLocationsInput>
+    connectOrCreate?: TruckCreateOrConnectWithoutLocationsInput
+    connect?: TruckWhereUniqueInput
+  }
+
   export type DecimalFieldUpdateOperationsInput = {
     set?: Decimal | DecimalJsLike | number | string
     increment?: Decimal | DecimalJsLike | number | string
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
     divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type TruckUpdateOneRequiredWithoutLocationsNestedInput = {
+    create?: XOR<TruckCreateWithoutLocationsInput, TruckUncheckedCreateWithoutLocationsInput>
+    connectOrCreate?: TruckCreateOrConnectWithoutLocationsInput
+    upsert?: TruckUpsertWithoutLocationsInput
+    connect?: TruckWhereUniqueInput
+    update?: XOR<XOR<TruckUpdateToOneWithWhereWithoutLocationsInput, TruckUpdateWithoutLocationsInput>, TruckUncheckedUpdateWithoutLocationsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -5440,6 +5644,7 @@ export namespace Prisma {
     website: string
     createdAt?: Date | string
     updatedAt?: Date | string | null
+    locations?: TruckLocationCreateNestedManyWithoutTruckInput
   }
 
   export type TruckUncheckedCreateWithoutOwnerInput = {
@@ -5452,6 +5657,7 @@ export namespace Prisma {
     website: string
     createdAt?: Date | string
     updatedAt?: Date | string | null
+    locations?: TruckLocationUncheckedCreateNestedManyWithoutTruckInput
   }
 
   export type TruckCreateOrConnectWithoutOwnerInput = {
@@ -5521,6 +5727,30 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutTrucksInput, UserUncheckedCreateWithoutTrucksInput>
   }
 
+  export type TruckLocationCreateWithoutTruckInput = {
+    id?: string
+    latitude: Decimal | DecimalJsLike | number | string
+    longitude: Decimal | DecimalJsLike | number | string
+    timestamp?: Date | string
+  }
+
+  export type TruckLocationUncheckedCreateWithoutTruckInput = {
+    id?: string
+    latitude: Decimal | DecimalJsLike | number | string
+    longitude: Decimal | DecimalJsLike | number | string
+    timestamp?: Date | string
+  }
+
+  export type TruckLocationCreateOrConnectWithoutTruckInput = {
+    where: TruckLocationWhereUniqueInput
+    create: XOR<TruckLocationCreateWithoutTruckInput, TruckLocationUncheckedCreateWithoutTruckInput>
+  }
+
+  export type TruckLocationCreateManyTruckInputEnvelope = {
+    data: TruckLocationCreateManyTruckInput | TruckLocationCreateManyTruckInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutTrucksInput = {
     update: XOR<UserUpdateWithoutTrucksInput, UserUncheckedUpdateWithoutTrucksInput>
     create: XOR<UserCreateWithoutTrucksInput, UserUncheckedCreateWithoutTrucksInput>
@@ -5552,6 +5782,101 @@ export namespace Prisma {
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type TruckLocationUpsertWithWhereUniqueWithoutTruckInput = {
+    where: TruckLocationWhereUniqueInput
+    update: XOR<TruckLocationUpdateWithoutTruckInput, TruckLocationUncheckedUpdateWithoutTruckInput>
+    create: XOR<TruckLocationCreateWithoutTruckInput, TruckLocationUncheckedCreateWithoutTruckInput>
+  }
+
+  export type TruckLocationUpdateWithWhereUniqueWithoutTruckInput = {
+    where: TruckLocationWhereUniqueInput
+    data: XOR<TruckLocationUpdateWithoutTruckInput, TruckLocationUncheckedUpdateWithoutTruckInput>
+  }
+
+  export type TruckLocationUpdateManyWithWhereWithoutTruckInput = {
+    where: TruckLocationScalarWhereInput
+    data: XOR<TruckLocationUpdateManyMutationInput, TruckLocationUncheckedUpdateManyWithoutTruckInput>
+  }
+
+  export type TruckLocationScalarWhereInput = {
+    AND?: TruckLocationScalarWhereInput | TruckLocationScalarWhereInput[]
+    OR?: TruckLocationScalarWhereInput[]
+    NOT?: TruckLocationScalarWhereInput | TruckLocationScalarWhereInput[]
+    id?: StringFilter<"TruckLocation"> | string
+    latitude?: DecimalFilter<"TruckLocation"> | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFilter<"TruckLocation"> | Decimal | DecimalJsLike | number | string
+    truckId?: StringFilter<"TruckLocation"> | string
+    timestamp?: DateTimeFilter<"TruckLocation"> | Date | string
+  }
+
+  export type TruckCreateWithoutLocationsInput = {
+    id?: string
+    logo?: NullableJsonNullValueInput | InputJsonValue
+    name: string
+    description: string
+    cuisineType: string
+    phoneNumber: string
+    website: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
+    owner: UserCreateNestedOneWithoutTrucksInput
+  }
+
+  export type TruckUncheckedCreateWithoutLocationsInput = {
+    id?: string
+    logo?: NullableJsonNullValueInput | InputJsonValue
+    name: string
+    description: string
+    cuisineType: string
+    phoneNumber: string
+    website: string
+    ownerId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
+  }
+
+  export type TruckCreateOrConnectWithoutLocationsInput = {
+    where: TruckWhereUniqueInput
+    create: XOR<TruckCreateWithoutLocationsInput, TruckUncheckedCreateWithoutLocationsInput>
+  }
+
+  export type TruckUpsertWithoutLocationsInput = {
+    update: XOR<TruckUpdateWithoutLocationsInput, TruckUncheckedUpdateWithoutLocationsInput>
+    create: XOR<TruckCreateWithoutLocationsInput, TruckUncheckedCreateWithoutLocationsInput>
+    where?: TruckWhereInput
+  }
+
+  export type TruckUpdateToOneWithWhereWithoutLocationsInput = {
+    where?: TruckWhereInput
+    data: XOR<TruckUpdateWithoutLocationsInput, TruckUncheckedUpdateWithoutLocationsInput>
+  }
+
+  export type TruckUpdateWithoutLocationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    logo?: NullableJsonNullValueInput | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    cuisineType?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    website?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    owner?: UserUpdateOneRequiredWithoutTrucksNestedInput
+  }
+
+  export type TruckUncheckedUpdateWithoutLocationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    logo?: NullableJsonNullValueInput | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    cuisineType?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    website?: StringFieldUpdateOperationsInput | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type TruckCreateManyOwnerInput = {
     id?: string
     logo?: NullableJsonNullValueInput | InputJsonValue
@@ -5574,6 +5899,7 @@ export namespace Prisma {
     website?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    locations?: TruckLocationUpdateManyWithoutTruckNestedInput
   }
 
   export type TruckUncheckedUpdateWithoutOwnerInput = {
@@ -5586,6 +5912,7 @@ export namespace Prisma {
     website?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    locations?: TruckLocationUncheckedUpdateManyWithoutTruckNestedInput
   }
 
   export type TruckUncheckedUpdateManyWithoutOwnerInput = {
@@ -5598,6 +5925,34 @@ export namespace Prisma {
     website?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TruckLocationCreateManyTruckInput = {
+    id?: string
+    latitude: Decimal | DecimalJsLike | number | string
+    longitude: Decimal | DecimalJsLike | number | string
+    timestamp?: Date | string
+  }
+
+  export type TruckLocationUpdateWithoutTruckInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TruckLocationUncheckedUpdateWithoutTruckInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TruckLocationUncheckedUpdateManyWithoutTruckInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
