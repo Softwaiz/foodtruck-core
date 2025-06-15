@@ -7,7 +7,8 @@ import { ValidationError } from "../../errors/validation.error";
 export class SearchController implements Controller {
 
     mount(router: Router): Router {
-        return router;
+        return router
+        .get("/", this.search);
     }
 
     search(request: Request, response: Response) {

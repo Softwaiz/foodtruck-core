@@ -14,7 +14,6 @@ export class SignupController implements Controller {
     }
 
     async signup(request: Request, response: Response) {
-
         let validated = SignupSchema.safeParse(request.body);
         if (!validated.success) {
             throw new ValidationError({

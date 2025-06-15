@@ -91,15 +91,12 @@ export class TruckLocationController implements Controller {
             });
         }
 
-        const location = service.createLocation({
+        const location = await service.createLocation({
             truck: truck,
             location: validated.data
         });
 
         return response.status(201).json(location);
     }
-
-    
-
 
 }

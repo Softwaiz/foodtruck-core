@@ -10,7 +10,8 @@ import { IdentityService } from "../../identity/identity.service";
 export class SigninController implements Controller {
 
     mount(router: Router) {
-        return router;
+        return router
+        .post("/", this.signin);
     }
 
     async signin(request: Request, response: Response) {

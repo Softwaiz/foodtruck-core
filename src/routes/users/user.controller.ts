@@ -20,7 +20,7 @@ export class UserController implements Controller {
         }
 
         if (userId.toLowerCase() === "me") {
-            return user;
+            return response.json(user);
         }
 
         let service = new UserService(request.db);

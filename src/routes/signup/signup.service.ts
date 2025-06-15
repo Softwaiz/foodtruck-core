@@ -25,6 +25,9 @@ export class SignupService {
                 lastName: data.lastName,
                 email: data.email,
                 password: hashedPassword
+            },
+            omit: {
+                password: true
             }
         });
 
